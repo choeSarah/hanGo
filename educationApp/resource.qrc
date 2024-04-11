@@ -1,0 +1,61 @@
+<RCC>
+    <qresource prefix="/vocabList">
+        <file>CS3505 - App Dictionary - Sheet1 (1).csv</file>
+    </qresource>
+    <qresource prefix="/"/>
+    <qresource prefix="/vocab_help">
+        <file>vocabHelp.png</file>
+    </qresource>
+    <qresource prefix="/alphabet_icon">
+        <file>Artboard_1_1.png</file>
+        <file>Artboard_1_2.png</file>
+        <file>Artboard_1_3.png</file>
+        <file>Artboard_1_4.png</file>
+        <file>Artboard_1_5.png</file>
+        <file>Artboard_1_6.png</file>
+        <file>Artboard_1_7.png</file>
+        <file>Artboard_1_8.png</file>
+        <file>Artboard_1_9.png</file>
+        <file>Artboard_1_10.png</file>
+        <file>Artboard_1_11.png</file>
+        <file>Artboard_1_12.png</file>
+        <file>Artboard_1_13.png</file>
+        <file>Artboard_1_14.png</file>
+        <file>Artboard_1_15.png</file>
+        <file>Artboard_1_16.png</file>
+        <file>Artboard_1_17.png</file>
+        <file>Artboard_1_18.png</file>
+        <file>Artboard_1_19.png</file>
+        <file>Artboard_1_20.png</file>
+        <file>Artboard_1_21.png</file>
+        <file>Artboard_1_22.png</file>
+        <file>Artboard_1_23.png</file>
+        <file>Artboard_1_24.png</file>
+    </qresource>
+    <qresource prefix="/alphabet_example">
+        <file>EX_1_1.png</file>
+        <file>EX_1_2.png</file>
+        <file>EX_1_3.png</file>
+        <file>EX_1_4.png</file>
+        <file>EX_1_5.png</file>
+        <file>EX_1_6.png</file>
+        <file>EX_1_7.png</file>
+        <file>EX_1_8.png</file>
+        <file>EX_1_9.png</file>
+        <file>EX_1_10.png</file>
+        <file>EX_1_11.png</file>
+        <file>EX_1_12.png</file>
+        <file>EX_1_13.png</file>
+        <file>EX_1_14.png</file>
+        <file>EX_1_15.png</file>
+        <file>EX_1_16.png</file>
+        <file>EX_1_17.png</file>
+        <file>EX_1_18.png</file>
+        <file>EX_1_19.png</file>
+        <file>EX_1_20.png</file>
+        <file>EX_1_21.png</file>
+        <file>EX_1_22.png</file>
+        <file>EX_1_23.png</file>
+        <file>EX_1_24.png</file>
+    </qresource>
+</RCC>
