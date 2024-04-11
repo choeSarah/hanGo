@@ -11,14 +11,14 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *pare
 
     ui->alphabet_canvas->setStyleSheet("border:1px solid #000000;");
     ui->alphabet_ref->setStyleSheet("border:1px solid #000000;");
-    ui->alphabet_penButton->setStyleSheet("border:2px solid #ff0000;");
-    ui->alphabet_eraserButton->setStyleSheet("border:0px solid #808080;");
+    // ui->alphabet_penButton->setStyleSheet("border:2px solid #ff0000;");
+    // ui->alphabet_eraserButton->setStyleSheet("border:0px solid #808080;");
     alphabet_container= new QWidget();
     alphabet_layout = new QVBoxLayout(alphabet_container);
     ui->alphabet_scrollArea->setWidgetResizable(true);
     ui->alphabet_scrollArea->setWidget(alphabet_container);
 
-    ViewImage = QPixmap(250,250).toImage();
+    ViewImage = QPixmap(200,200).toImage();
     ViewImage.fill(Qt::white);
     ui->alphabet_canvas->setPixmap(QPixmap::fromImage(ViewImage));
 
@@ -163,7 +163,7 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *pare
                 this,
                 [=]() {emit changeRef(i);});
     }
-    ui->alphabet_ref->setPixmap(QPixmap::fromImage(alphabetRefImage.at(0).scaled(250,250)));
+    ui->alphabet_ref->setPixmap(QPixmap::fromImage(alphabetRefImage.at(0).scaled(200,200)));
 
     emit needNewWord();
 }
@@ -176,15 +176,15 @@ MainWindow::~MainWindow()
 //Learn Alphabet Slots
 void MainWindow::changeToPen()
 {
-    ui->alphabet_penButton->setStyleSheet("border:2px solid #ff0000;");
-    ui->alphabet_eraserButton->setStyleSheet("border:0px solid #808080;");
+    ui->alphabet_penButton->setStyleSheet("border:2px solid #FFFFFF;");
+    ui->alphabet_eraserButton->setStyleSheet("");
     alphaMode = pen;
 }
 
 void MainWindow::changeToEraser()
 {
-    ui->alphabet_penButton->setStyleSheet("border:0px solid #808080;");
-    ui->alphabet_eraserButton->setStyleSheet("border:2px solid #ff0000;");
+    ui->alphabet_penButton->setStyleSheet("border:2px solid #FFFFFF;");
+    ui->alphabet_eraserButton->setStyleSheet("");
     alphaMode = eraser;
 }
 
@@ -206,7 +206,7 @@ void MainWindow::updateCanvas(QPixmap pixmap)
 
 void MainWindow::changeRefImage(int index)
 {
-    QImage ref = alphabetRefImage.at(index).scaled(250,250);
+    QImage ref = alphabetRefImage.at(index).scaled(200,200);
     ui->alphabet_ref->setPixmap(QPixmap::fromImage(ref));
     emit cleanCanvas();
 }
