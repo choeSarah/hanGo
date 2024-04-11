@@ -83,6 +83,21 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *pare
             &MainWindow::changeRefImage);
 
     //Connections for Learn Vocabulary page
+    connect (ui->penButton,
+            &QAbstractButton::clicked,
+            this,
+            &MainWindow::penButton_vocab);
+
+    connect (ui->eraserButton,
+            &QAbstractButton::clicked,
+            this,
+            &MainWindow::eraserButton_vocab);
+
+    connect (ui->clearButton,
+            &QAbstractButton::clicked,
+            this,
+            &MainWindow::clearButton_vocab);
+
     connect(&vocabulary,
             &Vocabulary::showVocab,
             this,
@@ -227,6 +242,7 @@ void MainWindow::generateDrawingPanels() {
         QLabel * label = new QLabel(ui->scrollArea);
 
         label->setFixedSize(150,150);
+        label->setStyleSheet("border:1px solid #000000;");
 
         QPixmap pixmap = QPixmap::fromImage(currentImage1);
         label->setPixmap(pixmap);
@@ -238,6 +254,9 @@ void MainWindow::generateDrawingPanels() {
 
         label1->setFixedSize(150,150);
         label2->setFixedSize(150,150);
+
+        label1->setStyleSheet("border:1px solid #000000;");
+        label2->setStyleSheet("border:1px solid #000000;");
 
         QPixmap pixmap1 = QPixmap::fromImage(currentImage1);
         QPixmap pixmap2 = QPixmap::fromImage(currentImage2);
@@ -262,6 +281,7 @@ void MainWindow::eraserButton_vocab()
     ui->penButton->setStyleSheet("");
     ui->eraserButton->setStyleSheet("border:2px solid #FFFFFF;");
     mode_vocab = eraser;
+    qDebug() << "made it to changing eraser";
 
 }
 
