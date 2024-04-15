@@ -2,8 +2,9 @@
 #include "ui_mainwindow.h"
 #include "vocabulary.h"
 #include "alphabet.h"
+#include "game.h"
 
-MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *parent)
+MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -31,6 +32,9 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *pare
 
     mode_vocab = pen;
     alphaMode = pen;
+
+    // ui->start_button->setStyleSheet("background-color: #000000;");
+    ui->start_button->setDisabled(true);
 
     //Connections for Learn Alphabet page
     connect(ui->alphabet_penButton,
@@ -166,6 +170,26 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, QWidget *pare
     ui->alphabet_ref->setPixmap(QPixmap::fromImage(alphabetRefImage.at(0).scaled(200,200)));
 
     emit needNewWord();
+
+    connect (&vocabulary,
+            &Vocabulary::sendVocabToGame,
+            &game,
+            &Game::handleVocab);
+
+    connect (&vocabulary,
+            &Vocabulary::sendDefToGame,
+            &game,
+            &Game::handleDef);
+
+    connect (ui->start_button,
+            &QAbstractButton::clicked,
+            this,
+            &MainWindow::handleStartGame);
+
+    connect (&game,
+            &Game::enableStart,
+            ui->start_button,
+            &QAbstractButton::setDisabled);
 }
 
 MainWindow::~MainWindow()
@@ -526,6 +550,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
         }
         break;
     }
+}
+
+void MainWindow::handleStartGame() {
+
 }
 
 //Navigation Connections

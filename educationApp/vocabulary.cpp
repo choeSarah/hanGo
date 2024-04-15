@@ -34,8 +34,13 @@ void Vocabulary::generateNewWord() {
 }
 
 void Vocabulary::handleAddVocab(QString word, QString definition) {
-    myVocab.append(word);
-    myDefinition.append(definition);
+    if (!myVocab.contains(word)) {
+        myVocab.append(word);
+        myDefinition.append(definition);
+
+        emit sendVocabToGame(myVocab);
+        emit sendDefToGame(myDefinition);
+    }
 }
 
 

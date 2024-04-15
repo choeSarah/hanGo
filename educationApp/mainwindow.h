@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "vocabulary.h"
 #include "alphabet.h"
+#include "game.h"
 #include "vocabhelp.h"
 #include <QDebug>
 #include <QString>
@@ -56,6 +57,9 @@ public slots:
     void generateDrawingPanels();
     void handleNumPanels(int size);
 
+    //game
+    void handleStartGame();
+
 signals:
     //alphabet
     void givePointToAlphabetModel(QPoint pt);
@@ -73,7 +77,7 @@ signals:
     // void givePointToModel();
 
 public:
-    MainWindow(Vocabulary& vocabulary, Alphabet& alphabet, QWidget *parent = nullptr);
+    MainWindow(Vocabulary& vocabulary, Alphabet& alphabet, Game &game, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:

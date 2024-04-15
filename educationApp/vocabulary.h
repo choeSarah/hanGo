@@ -29,6 +29,8 @@ public slots:
 signals:
     void showVocab(QString vocab, QString pronunciation, QString definition, QString sentence, QString translation);
     void getNumPanels(int size);
+    void sendVocabToGame(QVector<QString>);
+    void sendDefToGame(QVector<QString>);
 
 private:
     QVector<QString> vocab;
