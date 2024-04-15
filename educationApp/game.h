@@ -22,6 +22,10 @@ private:
     QVector<QString> words;
     QVector<QString> definitions;
 
+    QVector<QString> oldWords;
+    QVector<QString> oldDefinitions;
+
+
 public slots:
     // void updateWorld();
     // void checkInput(QString);
