@@ -17,6 +17,8 @@
 #include <QPainter>
 #include <QPen>
 #include <QPixmap>
+#include <QTimer>
+#include <QPixmap>
 
 
 QT_BEGIN_NAMESPACE
@@ -134,6 +136,8 @@ private:
     VocabHelp help_vocab;
 
     void scribble(QImage image, int layoutItemIndex);
+
+    QTimer timer;
 
 };
 #endif // MAINWINDOW_H

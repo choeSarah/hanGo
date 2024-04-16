@@ -58,4 +58,7 @@
         <file>EX_1_23.png</file>
         <file>EX_1_24.png</file>
     </qresource>
+    <qresource prefix="/gameImg">
+        <file>cs3505_final.png</file>
+    </qresource>
 </RCC>

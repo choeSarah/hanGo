@@ -38,6 +38,12 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->input->setVisible(false);
     ui->userInput_btn->setVisible(false);
 
+    QPixmap pixmap (":/gameImg/cs3505_final.png");
+    QSize imageSize = ui->game_canvas->size();
+
+    ui->game_canvas->setPixmap(pixmap);
+
+
     // ui->start_button->setStyleSheet("background-color: #000000;");
     ui->start_button->setDisabled(true);
 
@@ -216,6 +222,13 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             &MainWindow::sendInputWord,
             &game,
             &Game::checkInput);
+
+    // connect (&timer,
+    //         &QTimer::timeout,
+    //         &game,
+    //         &Game::updateWorld);
+
+    // timer.start(1000);
 }
 
 MainWindow::~MainWindow()

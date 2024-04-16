@@ -1,16 +1,37 @@
 #include "game.h"
 
-Game::Game(QObject *parent) : QObject(parent)
+Game::Game(QObject *parent) : QObject(parent), world(b2Vec2(0.0f, -10.0f))
 {
-    // world (b2Vec2(0.0f, -10.0f));
+    // // b2Vec2 gravity(0.0f, -10.0f);
+    // // world = new b2World(gravity);
 
-    // // Define the ground body.
-    // b2BodyDef groundBodyDef;
-    // groundBodyDef.position.Set(0.0f, -10.0f);
+    // b2BodyDef myBodyDef;
+    // myBodyDef.type = b2_dynamicBody;
+    // myBodyDef.position.Set(-10, -20);
+    // myBodyDef.angle = 0;
 
-    // b2Vec2 gravity(0.0f, -10.0f); // Original gravity
-    // world.SetGravity(b2Vec2(gravity.x, gravity.y * 0.1f));
+    // b2Body* dynamicBody = world.CreateBody(&myBodyDef);
 
+    // b2PolygonShape boxShape;
+    // boxShape.SetAsBox(1,1);
+
+    // b2FixtureDef boxFixtureDef;
+    // boxFixtureDef.shape = &boxShape;
+    // boxFixtureDef.density = 1.0f;
+    // //boxFixtureDef.friction = 0.3f;
+    // dynamicBody->CreateFixture(&boxFixtureDef);
+
+    // //connect(&timer, &QTimer::timeout, this, &Game::updateWorld);
+    // //timer.start(1000);
+}
+
+void Game::updateWorld() {
+    // // Update the Box2D world
+    // world.Step(1.0f / 60.0f, 6, 2);
+
+    // // Retrieve the position of the body and do something with it
+    // b2Vec2 position = body->GetPosition();
+    // qDebug() << "Body position: (" << position.x << ", " << position.y << ")";
 }
 
 void Game::handleVocab(QVector<QString> myVocab) {
@@ -53,3 +74,5 @@ void Game::checkInput(QString input) {
         qDebug() << "incorrect";
     }
 }
+
+

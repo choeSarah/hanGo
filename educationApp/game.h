@@ -16,9 +16,9 @@ public:
     explicit Game(QObject *parent = nullptr);
 
 private:
-    // b2World world;
-    // b2Body* body;
-    // QTimer timer;
+    b2World world;
+    b2Body* body;
+    QTimer timer;
 
     QVector<QString> words;
     QVector<QString> definitions;
@@ -31,8 +31,7 @@ private:
 
 
 public slots:
-    // void updateWorld();
-    // void checkInput(QString);
+    void updateWorld();
     void handleVocab(QVector<QString> myVocab);
     void handleDef(QVector<QString> myDef);
     void newGameWord();
