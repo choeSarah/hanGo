@@ -33,13 +33,14 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
-     <width>161</width>
-     <height>31</height>
+     <y>10</y>
+     <width>211</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>Arial</family>
      <pointsize>30</pointsize>
      <bold>true</bold>
     </font>
@@ -56,6 +57,11 @@
      <width>1041</width>
      <height>631</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
    </property>
    <property name="text">
     <string/>
