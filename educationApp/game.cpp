@@ -10,6 +10,7 @@ Game::Game(QObject *parent) : QObject(parent)
 
     // b2Vec2 gravity(0.0f, -10.0f); // Original gravity
     // world.SetGravity(b2Vec2(gravity.x, gravity.y * 0.1f));
+
 }
 
 void Game::handleVocab(QVector<QString> myVocab) {
@@ -24,4 +25,31 @@ void Game::handleVocab(QVector<QString> myVocab) {
 void Game::handleDef(QVector<QString> myDef) {
     definitions.clear();
     definitions = myDef;
+}
+
+void Game::newGameWord() {
+    int currentIndex = QRandomGenerator::global()->bounded(words.size());
+
+    gameWord = words.at(currentIndex);
+    gameDef = definitions.at(currentIndex);
+
+    oldWords.append(gameWord);
+    oldDefinitions.append(gameDef);
+
+    words.removeAt(words.indexOf(gameWord));
+    definitions.removeAt(definitions.indexOf(gameDef));
+
+    emit showGameWord(gameWord);
+}
+
+void Game::checkInput(QString input) {
+    QString lowerCase = input.toLower();
+
+    QString whiteTrim = lowerCase.trimmed();
+
+    if (whiteTrim == gameDef) {
+        qDebug() << "correct";
+    } else {
+        qDebug() << "incorrect";
+    }
 }

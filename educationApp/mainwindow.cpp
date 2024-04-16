@@ -33,6 +33,11 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     mode_vocab = pen;
     alphaMode = pen;
 
+    ui->level_label->setVisible(false);
+    ui->display_word->setVisible(false);
+    ui->input->setVisible(false);
+    ui->userInput_btn->setVisible(false);
+
     // ui->start_button->setStyleSheet("background-color: #000000;");
     ui->start_button->setDisabled(true);
 
@@ -190,6 +195,27 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             &Game::enableStart,
             ui->start_button,
             &QAbstractButton::setDisabled);
+
+
+    connect (ui->start_button,
+            &QAbstractButton::clicked,
+            &game,
+            &Game::newGameWord);
+
+    connect (&game,
+            &Game::showGameWord,
+            ui->display_word,
+            &QLabel::setText);
+
+    connect (ui->userInput_btn,
+            &QAbstractButton::clicked,
+            this,
+            [=]() {emit sendInputWord(ui->input->toPlainText());});
+
+    connect (this,
+            &MainWindow::sendInputWord,
+            &game,
+            &Game::checkInput);
 }
 
 MainWindow::~MainWindow()
@@ -553,7 +579,11 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 }
 
 void MainWindow::handleStartGame() {
-
+    ui->level_label->setVisible(true);
+    ui->display_word->setVisible(true);
+    ui->input->setVisible(true);
+    ui->userInput_btn->setVisible(true);
+    ui->start_button->setVisible(false);
 }
 
 //Navigation Connections

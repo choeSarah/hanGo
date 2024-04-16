@@ -76,6 +76,10 @@ signals:
     void scribbleLogic (QImage image, int layoutItemIndex, QHBoxLayout* layout);
     // void givePointToModel();
 
+    //game
+    void sendInputWord(QString);
+
+
 public:
     MainWindow(Vocabulary& vocabulary, Alphabet& alphabet, Game &game, QWidget *parent = nullptr);
     ~MainWindow();
@@ -130,5 +134,6 @@ private:
     VocabHelp help_vocab;
 
     void scribble(QImage image, int layoutItemIndex);
+
 };
 #endif // MAINWINDOW_H

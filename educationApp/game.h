@@ -6,7 +6,8 @@
 #include <QTimer>
 #include <QString>
 #include <QVector>
-
+#include <QRandomGenerator>
+#include <QDebug>
 
 class Game: public QObject
 {
@@ -22,6 +23,9 @@ private:
     QVector<QString> words;
     QVector<QString> definitions;
 
+    QString gameWord;
+    QString gameDef;
+
     QVector<QString> oldWords;
     QVector<QString> oldDefinitions;
 
@@ -31,12 +35,15 @@ public slots:
     // void checkInput(QString);
     void handleVocab(QVector<QString> myVocab);
     void handleDef(QVector<QString> myDef);
+    void newGameWord();
+    void checkInput(QString input);
 
 signals:
     void newDistance(int, int); //Signal for changing position of car
     void updateLevel(QString);
     void updateVocab (QString);
     void enableStart(bool);
+    void showGameWord(QString);
 };
 
 #endif // GAME_H
