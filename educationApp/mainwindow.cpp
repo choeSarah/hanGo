@@ -39,8 +39,6 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->userInput_btn->setVisible(false);
 
     QPixmap pixmap (":/gameImg/cs3505_final.png");
-    QSize imageSize = ui->game_canvas->size();
-
     ui->game_canvas->setPixmap(pixmap);
 
 
