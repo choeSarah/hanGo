@@ -61,6 +61,8 @@ public slots:
 
     //game
     void handleStartGame();
+    void draws(QPoint pt, QPoint start, QPoint end);
+
 
 signals:
     //alphabet
@@ -138,6 +140,8 @@ private:
     void scribble(QImage image, int layoutItemIndex);
 
     QTimer timer;
+
+    QImage gameImage;
 
 };
 #endif // MAINWINDOW_H

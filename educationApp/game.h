@@ -8,6 +8,7 @@
 #include <QVector>
 #include <QRandomGenerator>
 #include <QDebug>
+#include <QPoint>
 
 class Game: public QObject
 {
@@ -15,10 +16,13 @@ class Game: public QObject
 public:
     explicit Game(QObject *parent = nullptr);
 
+    void boost();
+
 private:
     b2World world;
     b2Body* body;
-    QTimer timer;
+    b2Body* groundBody;
+
 
     QVector<QString> words;
     QVector<QString> definitions;
@@ -43,6 +47,7 @@ signals:
     void updateVocab (QString);
     void enableStart(bool);
     void showGameWord(QString);
+    void drawSignal(QPoint, QPoint, QPoint);
 };
 
 #endif // GAME_H

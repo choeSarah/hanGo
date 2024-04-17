@@ -38,8 +38,8 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->input->setVisible(false);
     ui->userInput_btn->setVisible(false);
 
-    QPixmap pixmap (":/gameImg/cs3505_final.png");
-    ui->game_canvas->setPixmap(pixmap);
+    // QPixmap pixmap (":/gameImg/cs3505_final.png");
+    // ui->game_canvas->setPixmap(pixmap);
 
 
     // ui->start_button->setStyleSheet("background-color: #000000;");
@@ -221,12 +221,18 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             &game,
             &Game::checkInput);
 
-    // connect (&timer,
-    //         &QTimer::timeout,
-    //         &game,
-    //         &Game::updateWorld);
+    connect (
+        &timer,
+        &QTimer::timeout,
+        &game,
+        &Game::updateWorld);
 
-    // timer.start(1000);
+    connect (&game,
+            &Game::drawSignal,
+            this,
+            &MainWindow::draws);
+
+    gameImage = QPixmap(500,500).toImage();
 }
 
 MainWindow::~MainWindow()
@@ -595,7 +601,30 @@ void MainWindow::handleStartGame() {
     ui->input->setVisible(true);
     ui->userInput_btn->setVisible(true);
     ui->start_button->setVisible(false);
+
+    timer.start(1);
+
 }
+
+void MainWindow::draws(QPoint pt, QPoint start, QPoint end) {
+    gameImage.fill(Qt::white);
+    QPainter painter (&gameImage);
+
+    //Draws the slope
+    painter.drawLine(start, end);
+
+    //Draws the circle
+    QRect rect(pt.x(), pt.y(), 30, 30);
+    QPen pen(Qt::black);
+    painter.setBrush(Qt::black);
+    painter.setPen(pen);
+    painter.drawEllipse(rect);
+
+    //Updates the canvas in the ui
+    ui->game_canvas->setPixmap(QPixmap::fromImage(gameImage.scaled(450, 450)));
+    update();
+}
+
 
 //Navigation Connections
 
