@@ -107,7 +107,8 @@ void Game::handleDef(QVector<QString> myDef) {
 }
 
 void Game::newGameWord() {
-    int currentIndex = QRandomGenerator::global()->bounded(words.size());
+    //int currentIndex = QRandomGenerator::global()->bounded(words.size());
+    int currentIndex = 34;
 
     //Select random word and corresponding definition in user's list
     gameWord = words.at(currentIndex);
@@ -128,7 +129,7 @@ void Game::checkInput(QString input) {
     QString whiteTrim = lowerCase.trimmed();
 
     if (whiteTrim == gameDef) { //Check correctness of the user input
-        if (level == maxWords) {
+        if (oldWords.size() == maxWords) {
             emit userWins();
         } else {
             if (level == oldWords.size()) { //Reached end of level

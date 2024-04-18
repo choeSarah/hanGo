@@ -36,7 +36,6 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->level_label->setVisible(false);
     ui->display_word->setVisible(false);
     ui->input->setVisible(false);
-    ui->userInput_btn->setVisible(false);
     ui->playAgain_button->setVisible(false);
 
     // QPixmap pixmap (":/gameImg/cs3505_final.png");
@@ -223,8 +222,8 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             ui->display_word,
             &QLabel::setText);
 
-    connect (ui->userInput_btn,
-            &QAbstractButton::clicked,
+    connect (ui->input,
+            &QTextEdit::textChanged,
             this,
             &MainWindow::handleUserInput);
 
@@ -637,7 +636,6 @@ void MainWindow::handleStartGame() {
     ui->level_label->setVisible(true);
     ui->display_word->setVisible(true);
     ui->input->setVisible(true);
-    ui->userInput_btn->setVisible(true);
     ui->start_button->setVisible(false);
     ui->warningLabel->setVisible(false);
 
@@ -694,8 +692,11 @@ void MainWindow::handleLevelChange(int level) {
 }
 
 void MainWindow::handleUserInput() {
-    emit sendInputWord(ui->input->toPlainText());
-    ui->input->clear();
+    QString userInput = ui->input->toPlainText();
+    if (!userInput.isEmpty() && userInput.right(1) == "\n") {
+        emit sendInputWord(ui->input->toPlainText());
+        ui->input->clear();
+    }
 }
 
 void MainWindow::handleRestartTimer() {
