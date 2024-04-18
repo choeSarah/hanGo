@@ -19,12 +19,12 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->alphabet_scrollArea->setWidgetResizable(true);
     ui->alphabet_scrollArea->setWidget(alphabet_container);
 
-    ViewImage = QPixmap(200,200).toImage();
+    ViewImage = QPixmap(300,300).toImage();
     ViewImage.fill(Qt::white);
     ui->alphabet_canvas->setPixmap(QPixmap::fromImage(ViewImage));
 
-    currentImage1 = QPixmap(150,150).toImage();
-    currentImage2 = QPixmap(150,150).toImage();
+    currentImage1 = QPixmap(200,200).toImage();
+    currentImage2 = QPixmap(200,200).toImage();
     currentImage1.fill(Qt::white);
     currentImage2.fill(Qt::white);
 
@@ -37,6 +37,7 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->display_word->setVisible(false);
     ui->input->setVisible(false);
     ui->userInput_btn->setVisible(false);
+    ui->playAgain_button->setVisible(false);
 
     // QPixmap pixmap (":/gameImg/cs3505_final.png");
     // ui->game_canvas->setPixmap(pixmap);
@@ -161,7 +162,7 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
         alphabetImage.push_back(imageIcon);
         alphabetRefImage.push_back(imageEx);
     }
-    for(int i = 0; i <24; i ++)
+    for(int i = 0; i < 24; i ++)
     {
         QPushButton * button = new QPushButton(ui->alphabet_scrollArea);
         button->setFixedSize(100,100); //Set size for the button
@@ -170,13 +171,14 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
         //Reflecting the new frame to the button
         QIcon icon(QPixmap::fromImage(alphabetImage[i].scaled(100,100)));
         buttons[i]->setIcon(icon);
-        buttons[i]->setIconSize(QSize(90,90));
+        buttons[i]->setIconSize(QSize(100,100));
         connect(buttons.at(i),
                 &QPushButton::clicked,
                 this,
                 [=]() {emit changeRef(i);});
     }
-    ui->alphabet_ref->setPixmap(QPixmap::fromImage(alphabetRefImage.at(0).scaled(200,200)));
+
+    ui->alphabet_ref->setPixmap(QPixmap::fromImage(alphabetRefImage.at(0).scaled(300,300)));
 
     emit needNewWord();
 
@@ -207,6 +209,16 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             &Game::newGameWord);
 
     connect (&game,
+            &Game::generateNew,
+            &game,
+            &Game::newGameWord);
+
+    connect (&game,
+            &Game::levelChange,
+            this,
+            &MainWindow::handleLevelChange);
+
+    connect (&game,
             &Game::showGameWord,
             ui->display_word,
             &QLabel::setText);
@@ -214,7 +226,7 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     connect (ui->userInput_btn,
             &QAbstractButton::clicked,
             this,
-            [=]() {emit sendInputWord(ui->input->toPlainText());});
+            &MainWindow::handleUserInput);
 
     connect (this,
             &MainWindow::sendInputWord,
@@ -228,9 +240,29 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
         &Game::updateWorld);
 
     connect (&game,
+            &Game::restartTimer,
+            this,
+            &MainWindow::handleRestartTimer);
+
+    connect (&game,
             &Game::drawSignal,
             this,
             &MainWindow::draws);
+
+    connect (&game,
+            &Game::userLoses,
+            this,
+            &MainWindow::handleUserLoses);
+
+    connect (&game,
+            &Game::userWins,
+            this,
+            &MainWindow::handleUserWins);
+
+    connect(ui->playAgain_button,
+            &QAbstractButton::clicked,
+            &game,
+            &Game::playAgain);
 
     gameImage = QPixmap(500,500).toImage();
 }
@@ -273,7 +305,7 @@ void MainWindow::updateCanvas(QPixmap pixmap)
 
 void MainWindow::changeRefImage(int index)
 {
-    QImage ref = alphabetRefImage.at(index).scaled(200,200);
+    QImage ref = alphabetRefImage.at(index).scaled(300,300);
     ui->alphabet_ref->setPixmap(QPixmap::fromImage(ref));
     emit cleanCanvas();
 }
@@ -319,8 +351,8 @@ void MainWindow::generateDrawingPanels() {
         QLabel * label1 = new QLabel(ui->scrollArea);
         QLabel * label2 = new QLabel(ui->scrollArea);
 
-        label1->setFixedSize(150,150);
-        label2->setFixedSize(150,150);
+        label1->setFixedSize(200,200);
+        label2->setFixedSize(200,200);
 
         label1->setStyleSheet("border:1px solid #000000;");
         label2->setStyleSheet("border:1px solid #000000;");
@@ -338,22 +370,28 @@ void MainWindow::generateDrawingPanels() {
 //Drawing Slots
 void MainWindow::penButton_vocab()
 {
-    ui->penButton->setStyleSheet("border:2px solid #FFFFFF;");
-    ui->eraserButton->setStyleSheet("");
+    ui->penButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->eraserButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
+    ui->clearButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
+
     mode_vocab = pen;
 }
 
 void MainWindow::eraserButton_vocab()
 {
-    ui->penButton->setStyleSheet("");
-    ui->eraserButton->setStyleSheet("border:2px solid #FFFFFF;");
-    mode_vocab = eraser;
-    qDebug() << "made it to changing eraser";
+    ui->eraserButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->penButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
+    ui->clearButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
 
+    mode_vocab = eraser;
 }
 
 void MainWindow::clearButton_vocab()
 {
+    ui->clearButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->penButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
+    ui->eraserButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
+
     currentImage1.fill(Qt::white);
     currentImage2.fill(Qt::white);
 
@@ -601,30 +639,68 @@ void MainWindow::handleStartGame() {
     ui->input->setVisible(true);
     ui->userInput_btn->setVisible(true);
     ui->start_button->setVisible(false);
+    ui->warningLabel->setVisible(false);
 
     timer.start(1);
 
 }
 
 void MainWindow::draws(QPoint pt, QPoint start, QPoint end) {
-    gameImage.fill(Qt::white);
+    gameImage.fill(QColor(173, 216, 230));
     QPainter painter (&gameImage);
+    QPen pen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin);
+    painter.setBrush(Qt::black);
+    painter.setPen(pen);
 
     //Draws the slope
     painter.drawLine(start, end);
 
+    QPolygonF polygon;
+    polygon << start << end << QPoint(end.x(), gameImage.height()) << QPoint(start.x(), gameImage.height());
+
+    // Draw and fill the polygon with a color (e.g., light blue)
+    painter.setBrush(QColor(139, 69, 19)); // Brown color
+    painter.drawPolygon(polygon);
+
     //Draws the circle
-    QRect rect(pt.x(), pt.y(), 30, 30);
-    QPen pen(Qt::black);
-    painter.setBrush(Qt::black);
-    painter.setPen(pen);
-    painter.drawEllipse(rect);
+    // QRect rect(pt.x(), pt.y(), 30, 30);
+    // painter.drawEllipse(rect);
+
+    QPixmap image(":/gameImg/car.png"); // Replace ":/path/to/image.png" with the path to your image file
+    QPixmap rotatedImage = image.transformed(QTransform().rotate(45));
+    painter.drawPixmap(pt, rotatedImage.scaled(100, 100)); // Scale the image to fit the specified size
 
     //Updates the canvas in the ui
     ui->game_canvas->setPixmap(QPixmap::fromImage(gameImage.scaled(450, 450)));
     update();
 }
 
+void MainWindow::handleUserLoses() {
+    QImage userLost(":/gameImg/user_lost.png");
+    ui->game_canvas->setPixmap(QPixmap::fromImage(userLost));
+    timer.stop();
+    ui->playAgain_button->setVisible(true);
+}
+
+void MainWindow::handleUserWins() {
+    QImage userLost(":/gameImg/user_win.png");
+    ui->game_canvas->setPixmap(QPixmap::fromImage(userLost));
+    timer.stop();
+    ui->playAgain_button->setVisible(true);
+}
+
+void MainWindow::handleLevelChange(int level) {
+    ui->level_label->setText(QString("Level ") + QString::number(level));
+}
+
+void MainWindow::handleUserInput() {
+    emit sendInputWord(ui->input->toPlainText());
+    ui->input->clear();
+}
+
+void MainWindow::handleRestartTimer() {
+    timer.start();
+}
 
 //Navigation Connections
 

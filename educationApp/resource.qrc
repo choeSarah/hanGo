@@ -60,5 +60,13 @@
     </qresource>
     <qresource prefix="/gameImg">
         <file>cs3505_final.png</file>
+        <file>car.png</file>
+        <file>user_lost.png</file>
+        <file>user_win.png</file>
+    </qresource>
+    <qresource prefix="/toolIcons">
+        <file>eraser.png</file>
+        <file>pen.png</file>
+        <file>clear.png</file>
     </qresource>
 </RCC>

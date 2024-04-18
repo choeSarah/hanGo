@@ -2,7 +2,7 @@
 
 Alphabet::Alphabet(QObject *parent) : QObject(parent)
 {
-    currentImage = QPixmap(200,200).toImage();
+    currentImage = QPixmap(300,300).toImage();
     currentImage.fill(Qt::white);
     myPenWidth = 10;
     myPenColor = Qt::black;

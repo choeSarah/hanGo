@@ -33,6 +33,9 @@ private:
     QVector<QString> oldWords;
     QVector<QString> oldDefinitions;
 
+    int level;
+    int maxWords;
+
 
 public slots:
     void updateWorld();
@@ -40,6 +43,7 @@ public slots:
     void handleDef(QVector<QString> myDef);
     void newGameWord();
     void checkInput(QString input);
+    void playAgain();
 
 signals:
     void newDistance(int, int); //Signal for changing position of car
@@ -48,6 +52,11 @@ signals:
     void enableStart(bool);
     void showGameWord(QString);
     void drawSignal(QPoint, QPoint, QPoint);
+    void userWins();
+    void userLoses();
+    void generateNew();
+    void levelChange(int);
+    void restartTimer();
 };
 
 #endif // GAME_H

@@ -62,6 +62,11 @@ public slots:
     //game
     void handleStartGame();
     void draws(QPoint pt, QPoint start, QPoint end);
+    void handleUserLoses();
+    void handleUserWins();
+    void handleLevelChange(int);
+    void handleUserInput();
+    void handleRestartTimer();
 
 
 signals:

@@ -2,7 +2,7 @@
 
 Game::Game(QObject *parent)
     : QObject(parent),
-    world(b2Vec2(0.0f, -10.0f))
+    world(b2Vec2(0.0f, -8.0f))
 {
     // Define the ground body.
     b2BodyDef groundBodyDef;
@@ -47,6 +47,8 @@ Game::Game(QObject *parent)
     fixtureDef.restitution = 0.0f;
 
     body->CreateFixture(&fixtureDef);
+
+    level = 1;
 }
 
 void Game::updateWorld() {
@@ -78,20 +80,25 @@ void Game::updateWorld() {
 
     emit drawSignal(sendPoint, startPoint, endPoint);
 
-    //If the circle hits the bottom of the view, stop moving
+    //If the circle hits the bottom of the view, player loses
     if (position.y <= -950) {
-        body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-        body->SetTransform(b2Vec2(position.x, -950.0f), body->GetAngle());
+        // body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+        // body->SetTransform(b2Vec2(position.x, -950.0f), body->GetAngle());
+
+        emit userLoses();
     }
+
 }
 
 void Game::handleVocab(QVector<QString> myVocab) {
     words.clear();
     words = myVocab;
 
-    if (words.size() >= 5){
+    if (words.size() >= 1){
         emit enableStart(false);
+        maxWords = words.size();
     }
+
 }
 
 void Game::handleDef(QVector<QString> myDef) {
@@ -121,15 +128,55 @@ void Game::checkInput(QString input) {
     QString whiteTrim = lowerCase.trimmed();
 
     if (whiteTrim == gameDef) { //Check correctness of the user input
-        boost();
-    } else {
-        qDebug() << "incorrect";
+        if (level == maxWords) {
+            emit userWins();
+        } else {
+            if (level == oldWords.size()) { //Reached end of level
+                level++; //Move to next level
+                emit levelChange(level);
+
+                for (int i=0; i<oldWords.size(); i++) {
+                    words.append(oldWords.at(i));
+                    definitions.append(oldDefinitions.at(i));
+                }
+
+                oldWords.clear();
+                oldDefinitions.clear();
+
+                //Resetting the car
+                b2Vec2 newPosition(0.0f, 0.0f);
+                body->SetTransform(newPosition, body->GetAngle());
+                emit generateNew();
+            } else { //Still on a level
+                boost();
+                emit generateNew();
+            }
+        }
+
     }
 }
 
 void Game::boost() {
-    b2Vec2 impulse (-1000.0f, 0.0f); //Define an impulse vector
+    b2Vec2 impulse (-800.0f, 0.0f); //Define an impulse vector
     body->SetLinearVelocity(body->GetLinearVelocity() + impulse); //Apply the impulse
+}
+
+void Game::playAgain() {
+    level = 1;
+    emit levelChange(level);
+
+    for (int i=0; i<oldWords.size(); i++) {
+        words.append(oldWords.at(i));
+        definitions.append(oldDefinitions.at(i));
+    }
+
+    oldWords.clear();
+    oldDefinitions.clear();
+
+    b2Vec2 newPosition(0.0f, 0.0f);
+    body->SetTransform(newPosition, body->GetAngle());
+    emit generateNew();
+    emit restartTimer();
 }
 
 
