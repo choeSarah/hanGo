@@ -45,6 +45,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public slots:
+    void handleCoverImage();
+
     //alphabet
     void changeToPen();
     void changeToEraser();
@@ -145,6 +147,7 @@ private:
     void scribble(QImage image, int layoutItemIndex);
 
     QTimer timer;
+    QTimer coverTimer;
 
     QImage gameImage;
 

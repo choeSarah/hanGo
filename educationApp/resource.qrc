@@ -2,8 +2,12 @@
     <qresource prefix="/vocabList">
         <file>CS3505 - App Dictionary - Sheet1 (1).csv</file>
     </qresource>
-    <qresource prefix="/"/>
-    <qresource prefix="/vocab_help">
+    <qresource prefix="/coverImage">
+        <file>coverImage.png</file>
+    </qresource>
+    <qresource prefix="/help_images">
+        <file>alphaHelp.png</file>
+        <file>gameHelp.png</file>
         <file>vocabHelp.png</file>
     </qresource>
     <qresource prefix="/alphabet_icon">

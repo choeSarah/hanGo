@@ -2,7 +2,7 @@
 
 Game::Game(QObject *parent)
     : QObject(parent),
-    world(b2Vec2(0.0f, -8.0f))
+    world(b2Vec2(0.0f, -3.0f))
 {
     // Define the ground body.
     b2BodyDef groundBodyDef;
@@ -10,7 +10,7 @@ Game::Game(QObject *parent)
     groundBodyDef.angle=-M_PI / 4;
 
     //Define gravity
-    b2Vec2 gravity(0.0f, -10.0f);
+    b2Vec2 gravity(0.0f, -3.0f);
     world.SetGravity(b2Vec2(gravity.x, gravity.y));
 
     // The body is also added to the world.
@@ -18,7 +18,7 @@ Game::Game(QObject *parent)
 
     // Define the ground box shape.
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(1500.0f, 10.0f);
+    groundBox.SetAsBox(8000.0f, 10.0f);
 
     // Add the ground fixture to the ground body.
     groundBody->CreateFixture(&groundBox, 0.0f);
@@ -28,7 +28,6 @@ Game::Game(QObject *parent)
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(0.0f, -50.0f);
     body = world.CreateBody(&bodyDef);
-
 
     // Define another box shape for our dynamic body.
     b2CircleShape circle;
@@ -82,9 +81,6 @@ void Game::updateWorld() {
 
     //If the circle hits the bottom of the view, player loses
     if (position.y <= -950) {
-        // body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-        // body->SetTransform(b2Vec2(position.x, -950.0f), body->GetAngle());
-
         emit userLoses();
     }
 
@@ -94,7 +90,7 @@ void Game::handleVocab(QVector<QString> myVocab) {
     words.clear();
     words = myVocab;
 
-    if (words.size() >= 1){
+    if (words.size() >= 0){
         emit enableStart(false);
         maxWords = words.size();
     }
@@ -107,8 +103,7 @@ void Game::handleDef(QVector<QString> myDef) {
 }
 
 void Game::newGameWord() {
-    //int currentIndex = QRandomGenerator::global()->bounded(words.size());
-    int currentIndex = 34;
+    int currentIndex = QRandomGenerator::global()->bounded(words.size());
 
     //Select random word and corresponding definition in user's list
     gameWord = words.at(currentIndex);
@@ -158,7 +153,7 @@ void Game::checkInput(QString input) {
 }
 
 void Game::boost() {
-    b2Vec2 impulse (-800.0f, 0.0f); //Define an impulse vector
+    b2Vec2 impulse (-200.0f, 0.0f); //Define an impulse vector
     body->SetLinearVelocity(body->GetLinearVelocity() + impulse); //Apply the impulse
 }
 

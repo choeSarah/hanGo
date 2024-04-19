@@ -7,7 +7,7 @@ VocabHelp::VocabHelp(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QPixmap pixmap(":/vocab_help/vocabHelp.png");
+    QPixmap pixmap(":/help_images/vocabHelp.png");
 
     QSize imageSize = ui->image->size();
     ui->image->setPixmap(pixmap.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));

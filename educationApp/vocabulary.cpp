@@ -21,7 +21,6 @@ Vocabulary::Vocabulary(QObject *parent) : QObject(parent) {
 
 void Vocabulary::generateNewWord() {
     int currentIndex = QRandomGenerator::global()->bounded(100);
-    //qDebug() << currentIndex;
 
     currentVocab = vocab.at(currentIndex);
     currentPronunciation = pronunciation.at(currentIndex);
