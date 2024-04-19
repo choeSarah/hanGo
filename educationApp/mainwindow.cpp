@@ -351,7 +351,7 @@ void MainWindow::generateDrawingPanels() {
     if (wordSize == 1) {
         QLabel * label = new QLabel(ui->scrollArea);
 
-        label->setFixedSize(150,150);
+        label->setFixedSize(200,200);
         label->setStyleSheet("border:1px solid #000000;");
 
         QPixmap pixmap = QPixmap::fromImage(currentImage1);
