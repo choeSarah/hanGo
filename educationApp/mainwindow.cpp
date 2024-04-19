@@ -776,10 +776,22 @@ void MainWindow::on_game_navBtn2_clicked()
 
 }
 
-void MainWindow::on_help_btn_clicked()
+void MainWindow::on_help_btn_vocab_clicked()
 {
     help_vocab.setModal(true);
     help_vocab.show();
+}
+
+void MainWindow::on_help_btn_alphabet_clicked()
+{
+    help_alphabet.setModal(true);
+    help_alphabet.show();
+}
+
+void MainWindow::on_help_btn_game_clicked()
+{
+    help_game.setModal(true);
+    help_game.show();
 }
 
 

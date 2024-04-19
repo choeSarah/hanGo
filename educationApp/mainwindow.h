@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "alphabethelp.h"
+#include "gamehelp.h"
 #include "vocabulary.h"
 #include "alphabet.h"
 #include "game.h"
@@ -106,7 +108,9 @@ private slots:
     void on_game_navBtn1_clicked();
     void on_game_navBtn3_clicked();
     void on_game_navBtn2_clicked();
-    void on_help_btn_clicked();
+    void on_help_btn_vocab_clicked();
+    void on_help_btn_alphabet_clicked();
+    void on_help_btn_game_clicked();
 
     void penButton_vocab();
     void eraserButton_vocab();
@@ -142,7 +146,10 @@ private:
     int currentlyOnPanel;
     int wordSize;
 
+    // help menu
     VocabHelp help_vocab;
+    AlphabetHelp help_alphabet;
+    GameHelp help_game;
 
     void scribble(QImage image, int layoutItemIndex);
 

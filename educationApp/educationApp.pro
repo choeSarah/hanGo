@@ -56,7 +56,9 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     alphabet.cpp \
+    alphabethelp.cpp \
     game.cpp \
+    gamehelp.cpp \
     main.cpp \
     mainwindow.cpp \
     vocabhelp.cpp \
@@ -111,12 +113,16 @@ HEADERS += \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
     alphabet.h \
+    alphabethelp.h \
     game.h \
+    gamehelp.h \
     mainwindow.h \
     vocabhelp.h \
     vocabulary.h
 
 FORMS += \
+    alphabethelp.ui \
+    gamehelp.ui \
     mainwindow.ui \
     vocabhelp.ui
 

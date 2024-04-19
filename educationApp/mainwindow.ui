@@ -292,7 +292,7 @@ border: 2px solid black;</string>
         <normaloff>:/toolIcons/clear.png</normaloff>:/toolIcons/clear.png</iconset>
       </property>
      </widget>
-     <widget class="QPushButton" name="help_btn_3">
+     <widget class="QPushButton" name="help_btn_alphabet">
       <property name="geometry">
        <rect>
         <x>740</x>
@@ -637,7 +637,7 @@ border: 2px solid #040404;</string>
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="help_btn">
+     <widget class="QPushButton" name="help_btn_vocab">
       <property name="geometry">
        <rect>
         <x>740</x>
@@ -1026,7 +1026,7 @@ border: 2px solid black;</string>
        <string>Play Again</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="help_btn_2">
+     <widget class="QPushButton" name="help_btn_game">
       <property name="geometry">
        <rect>
         <x>740</x>
@@ -1081,7 +1081,7 @@ border: 2px solid #040404;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">
