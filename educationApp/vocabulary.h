@@ -1,3 +1,13 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Jerry Wu
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the model for the vocabulary page.
+ */
+
+
 #ifndef VOCABULARY_H
 #define VOCABULARY_H
 

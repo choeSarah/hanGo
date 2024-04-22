@@ -1,3 +1,13 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Cheng-han Pai
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the view and controller for this application, which the user utilizes.
+ */
+
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

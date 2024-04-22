@@ -1,3 +1,14 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Anand Palukuri
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief Displays is the help window for vocab page.
+ */
+
+
+
 #include "vocabhelp.h"
 #include "ui_vocabhelp.h"
 

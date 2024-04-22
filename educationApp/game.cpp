@@ -1,3 +1,14 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Cheng-han Pai
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the model for the game page.
+ */
+
+
+
 #include "game.h"
 
 Game::Game(QObject *parent)

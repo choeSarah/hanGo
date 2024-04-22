@@ -1,3 +1,14 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Anand Palukuri
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the model for the game page.
+ */
+
+
+
 #ifndef GAME_H
 #define GAME_H
 
@@ -8,6 +19,7 @@
 #include <QVector>
 #include <QRandomGenerator>
 #include <QDebug>
+
 #include <QPoint>
 
 class Game: public QObject

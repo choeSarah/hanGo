@@ -1,3 +1,14 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Anand Palukuri
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief Displays is the help window for game page.
+ */
+
+
+
 #include "gamehelp.h"
 #include "ui_gamehelp.h"
 

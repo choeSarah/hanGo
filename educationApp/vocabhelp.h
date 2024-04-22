@@ -1,3 +1,13 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Sarah Choe
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the help window for vocab page.
+ */
+
+
 #ifndef VOCABHELP_H
 #define VOCABHELP_H
 

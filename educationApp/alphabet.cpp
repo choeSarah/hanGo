@@ -1,3 +1,14 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Sarah Choe
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the model for the Alphabets section of the application.
+ */
+
+
+
 #include "alphabet.h"
 
 Alphabet::Alphabet(QObject *parent) : QObject(parent)

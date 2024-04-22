@@ -1,3 +1,13 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Jerry Wu
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This reprent the view of the educationalApp, which the user interacts with.
+ */
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "vocabulary.h"

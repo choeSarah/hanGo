@@ -1,3 +1,13 @@
+/**
+ * Name: Cheng-han Pai, Jerry Wu, Sarah Choe, Anand Palukuri
+ * review: Anand Palukuri
+ * Class: CS3505
+ *
+ * @title Assignment : educationalApp
+ * @brief This is the model for the vocabulary page.
+ */
+
+
 #include "vocabulary.h"
 
 Vocabulary::Vocabulary(QObject *parent) : QObject(parent) {
