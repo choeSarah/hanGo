@@ -38,6 +38,11 @@ private:
 
 
 public slots:
+
+    ///
+    /// \brief Sends information about ramp start, end and object positions taken from box2D 60 times a second,
+    /// then emites signal to mainwindow to display for the user.
+    ///
     void updateWorld();
 
     ///
@@ -63,6 +68,9 @@ public slots:
     ///
     void checkInput(QString input);
 
+    ///
+    /// \brief Resets Box2D world and sets the level back to "1". Then restarts the game.
+    ///
     void playAgain();
 
 signals:
@@ -81,11 +89,23 @@ signals:
 
     // send the game word.
     void showGameWord(QString);
+
+    // signal tell the mainwindow to draw the game.
     void drawSignal(QPoint, QPoint, QPoint);
+
+    // tells the view user won.
     void userWins();
+
+    //tells the view user lost.
     void userLoses();
+
+    // tells to generate a new word for the game.
     void generateNew();
+
+    // tells the view to change the level.
     void levelChange(int);
+
+    // tells the view reset the timer
     void restartTimer();
 };
 

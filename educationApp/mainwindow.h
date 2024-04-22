@@ -149,28 +149,46 @@ public slots:
     void handleUserInput();
 
     ///
-    /// \brief starts the timer.
+    /// \brief Starts the timer.
     ///
     void handleRestartTimer();
 
 
 signals:
     //alphabet
+    // Gives mouse position to alphabet model.
     void givePointToAlphabetModel(QPoint pt);
+
+    // Send a Qimage to the alphabet model.
     void giveImageToALphabetModel(QImage image);
+
+    // Sends a signal to model to draw a line from previous point to given point.
     void drawPen(QPoint pt);
+
+    // Sends a signal to model to draw a white line from previous point to given point.
     void erase(QPoint pt);
+
+    // sends the index of the Qimage it changed it's reference image to
     void changeRef(int);
+
+    // Sends a signal to model to set the whole Qimage view is displaying to white.
     void cleanCanvas();
 
     //vocabulary
+    // Generates the next word and send it to view.
     void needNewWord();
+
+    // Sends a signal tell model to add word to game list.
     void addToList(QString word, QString definition);
+
+    // Generates a new drawing panel.
     void showPanels();
-    void scribbleLogic (QImage image, int layoutItemIndex, QHBoxLayout* layout);
+
+    // void scribbleLogic (QImage image, int layoutItemIndex, QHBoxLayout* layout);
     // void givePointToModel();
 
     //game
+    // Sends the word user inputed to the model.
     void sendInputWord(QString);
 
 
@@ -233,12 +251,21 @@ private slots:
     ///
     void on_game_navBtn2_clicked();
 
+
+    //void on_help_btn_clicked();
     ///
     /// \brief shows the help ui for vocab
     ///
-    void on_help_btn_clicked();
     void on_help_btn_vocab_clicked();
+
+    ///
+    /// \brief shows the help ui for alphabet
+    ///
     void on_help_btn_alphabet_clicked();
+
+    ///
+    /// \brief shows the help ui for game
+    ///
     void on_help_btn_game_clicked();
 
     ///
