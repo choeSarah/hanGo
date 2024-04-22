@@ -101,7 +101,7 @@ void Game::handleVocab(QVector<QString> myVocab) {
     words.clear();
     words = myVocab;
 
-    if (words.size() >= 0){
+    if (words.size() >= 5){
         emit enableStart(false);
         maxWords = words.size();
     }

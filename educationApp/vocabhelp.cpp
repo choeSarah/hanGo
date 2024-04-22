@@ -21,7 +21,7 @@ VocabHelp::VocabHelp(QWidget *parent)
     QPixmap pixmap(":/help_images/vocabHelp.png");
 
     QSize imageSize = ui->image->size();
-    ui->image->setPixmap(pixmap.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(imageSize));
     ui->image->setAlignment(Qt::AlignCenter);
 }
 
