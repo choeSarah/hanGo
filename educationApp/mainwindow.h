@@ -46,26 +46,107 @@ class MainWindow : public QMainWindow
 
 public slots:
     //alphabet
+
+    ///
+    /// \brief selecting the pen tool
+    ///
     void changeToPen();
+
+    ///
+    /// \brief selecting the erase tool
+    ///
     void changeToEraser();
+
+    ///
+    /// \brief Gets a point to draw when in the alphbet stack
+    /// \param pt : the point where mouse previously was.
+    ///
     void getPointFromAlphabetModel(QPoint pt);
+
+    ///
+    /// \brief Gets a Qimage for the model.
+    /// \param image : The Qimage sent from model
+    ///
     void getImageFromAlphabetModel(QImage image);
+
+    ///
+    /// \brief udate canvas with new Qimage for drawing
+    /// \param pixmap: The pixmap canvas is using to updating
+    ///
     void updateCanvas(QPixmap pixmap);
+
+    ///
+    /// \brief Change the reference image for alphabet
+    /// \param index: which reference to choose.c
+    ///
     void changeRefImage(int index);
 
     //vocabulary
+
+    ///
+    /// \brief displays the all the information for vocab page.
+    /// \param vocab : The korean word
+    /// \param pronunciation : The pronounciation of the korean word
+    /// \param definition : The definition of the korean words
+    /// \param sentence : Example of vocab being used in a sentence
+    /// \param translation : English meaning of the word.
+    ///
     void handleShowVocab(QString vocab, QString pronunciation, QString definition, QString sentence, QString translation);
+
+    ///
+    /// \brief adds the korean word to game list.
+    ///
     void handleAddList();
+
+    ///
+    /// \brief creates drawing panel base on number of consonance.
+    ///
     void generateDrawingPanels();
+
+    ///
+    /// \brief sets the size of the word.
+    /// \param size : number of consonants in the word
+    ///
     void handleNumPanels(int size);
 
     //game
+
+    ///
+    /// \brief starts the game.
+    ///
     void handleStartGame();
+
+    ///
+    /// \brief Draws and updates the game view at the 60fps using painter for the user.
+    /// \param pt : Position of the car object.
+    /// \param start : start position of the slope.
+    /// \param end : end position of the slope.
+    ///
     void draws(QPoint pt, QPoint start, QPoint end);
+
+    ///
+    /// \brief Displays the "you lose" screen, when the car falls all the way down the slope.
+    ///
     void handleUserLoses();
+
+    ///
+    /// \brief Display the "you win" screen, when the user translates all the words in the list correctly.
+    ///
     void handleUserWins();
+
+    ///
+    /// \brief Changes the level that is displayed.
+    ///
     void handleLevelChange(int);
+
+    ///
+    /// \brief Takes in the user input and converts it to plain text and send it to model
+    ///
     void handleUserInput();
+
+    ///
+    /// \brief starts the timer.
+    ///
     void handleRestartTimer();
 
 
@@ -90,29 +171,97 @@ signals:
 
 
 public:
+    ///
+    /// \brief MainWindow sets all the connections sets up the ui.
+    /// \param vocabulary : vocabulary model
+    /// \param alphabet : alphabet model
+    /// \param game : game model
+    /// \param parent : parent model
+    ///
     MainWindow(Vocabulary& vocabulary, Alphabet& alphabet, Game &game, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     //Navigation Slots
+
+    ///
+    /// \brief switches to the alphabets stackedWidget when on alphabets stackedWidge.
+    ///
     void on_alphabet_navBtn2_clicked();
+
+    ///
+    /// \brief switches to the vocabulary stackedWidget when on alphabets stackedWidget.
+    ///
     void on_alphabet_navBtn1_clicked();
+
+    ///
+    /// \brief switches to the game stackedWidget when on alphabets stackedWidget.
+    ///
     void on_alphabet_navBtn3_clicked();
+
+    ///
+    /// \brief switches to the alphabets stackedWidget when on vocabulary stackedWidget.
+    ///
     void on_vocabulary_navBtn1_clicked();
+
+    ///
+    /// \brief switches to the game stackedWidget when on vocabulary stackedWidget.
+    ///
     void on_vocabulary_navBtn3_clicked();
+
+    ///
+    /// \brief switches to the vocabulary stackedWidget when on vocabulary stackedWidget.
+    ///
     void on_vocabulary_navBtn2_clicked();
+
+    ///
+    /// \brief switches to the alphabets stackedWidget when on game stackedWidget.
+    ///
     void on_game_navBtn1_clicked();
+
+    ///
+    /// \brief switches to the game stackedWidget when on game stackedWidget.
+    ///
     void on_game_navBtn3_clicked();
+
+    ///
+    /// \brief switches to the vocabulary stackedWidget when on game stackedWidget.
+    ///
     void on_game_navBtn2_clicked();
+
+    ///
+    /// \brief shows the help ui for vocab
+    ///
     void on_help_btn_clicked();
 
+    ///
+    /// \brief seleting pen tool in vocabulary stack.
+    ///
     void penButton_vocab();
+
+    ///
+    /// \brief selecting eraser tool in vocabulary stack
+    ///
     void eraserButton_vocab();
+
+    ///
+    /// \brief clears all drawing done on the panel.
+    ///
     void clearButton_vocab();
 
 protected:
     //Mouse events
+
+    ///
+    /// \brief Takes in x and y of where ever mouse was pressed to draw.
+    /// \param event : mouse action.
+    ///
     void mousePressEvent(QMouseEvent *event);
+
+    ///
+    /// \brief Tracks mouse movement to draw on the labels mouse is on top of.
+    /// \param event : mouse actions.
+    ///
     void mouseMoveEvent(QMouseEvent *event);
 
 private:
@@ -142,11 +291,16 @@ private:
 
     VocabHelp help_vocab;
 
-    void scribble(QImage image, int layoutItemIndex);
-
     QTimer timer;
 
     QImage gameImage;
+
+    ///
+    /// \brief Draws on the label with pixmap
+    /// \param image : Qimage what was drawn in from previous the update.
+    /// \param layoutItemIndex
+    ///
+    void scribble(QImage image, int layoutItemIndex);
 
 };
 #endif // MAINWINDOW_H

@@ -39,17 +39,47 @@ private:
 
 public slots:
     void updateWorld();
+
+    ///
+    /// \brief Updates the vocab list for game. if there are less than 5 words than woun't let u play.
+    /// \param myVocab : List of vocab add for the game.
+    ///
     void handleVocab(QVector<QString> myVocab);
+
+    ///
+    /// \brief Udates the definitions list for game.
+    /// \param myDef : List of definition.
+    ///
     void handleDef(QVector<QString> myDef);
+
+    ///
+    /// \brief Chooses new word from the list the ask in the game.
+    ///
     void newGameWord();
+
+    ///
+    /// \brief Checks if the answer user Inputed is correct.
+    /// \param input : Answer by the user.
+    ///
     void checkInput(QString input);
+
     void playAgain();
 
 signals:
+
+    // sends the position of the car.
     void newDistance(int, int); //Signal for changing position of car
+
+    // sends when about to level up.
     void updateLevel(QString);
+
+    // sends vocab to display to update.
     void updateVocab (QString);
+
+    //sends view that the game started.
     void enableStart(bool);
+
+    // send the game word.
     void showGameWord(QString);
     void drawSignal(QPoint, QPoint, QPoint);
     void userWins();
