@@ -38,10 +38,6 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
     ui->input->setVisible(false);
     ui->playAgain_button->setVisible(false);
 
-    // QPixmap pixmap (":/gameImg/cs3505_final.png");
-    // ui->game_canvas->setPixmap(pixmap);
-
-
     // ui->start_button->setStyleSheet("background-color: #000000;");
     ui->start_button->setDisabled(true);
 
@@ -264,6 +260,17 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
             &Game::playAgain);
 
     gameImage = QPixmap(500,500).toImage();
+
+    coverTimer.start(2000);
+
+    connect(&coverTimer,
+            &QTimer::timeout,
+            this,
+            &MainWindow::handleCoverImage);
+
+    QImage coverImage (":/coverImage/coverImage.png");
+    QPixmap coverMap = QPixmap::fromImage(coverImage);
+    ui->coverImage->setPixmap(coverMap);
 }
 
 MainWindow::~MainWindow()
@@ -271,18 +278,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::handleCoverImage() {
+    ui->coverImage->setVisible(false);
+    coverTimer.stop();
+}
+
 //Learn Alphabet Slots
 void MainWindow::changeToPen()
 {
-    ui->alphabet_penButton->setStyleSheet("border:2px solid #FFFFFF;");
-    ui->alphabet_eraserButton->setStyleSheet("");
+    ui->alphabet_penButton->setStyleSheet("border-radius: 15px; border: 2px solid #119DA4;");
+    ui->alphabet_eraserButton->setStyleSheet("border-radius: 15px; border: 2px solid black;");
     alphaMode = pen;
 }
 
 void MainWindow::changeToEraser()
 {
-    ui->alphabet_penButton->setStyleSheet("border:2px solid #FFFFFF;");
-    ui->alphabet_eraserButton->setStyleSheet("");
+    ui->alphabet_penButton->setStyleSheet("border-radius: 15px; border: 2px solid black;");
+    ui->alphabet_eraserButton->setStyleSheet("border-radius: 15px; border: 2px solid #119DA4;");
     alphaMode = eraser;
 }
 
@@ -339,7 +351,7 @@ void MainWindow::generateDrawingPanels() {
     if (wordSize == 1) {
         QLabel * label = new QLabel(ui->scrollArea);
 
-        label->setFixedSize(150,150);
+        label->setFixedSize(200,200);
         label->setStyleSheet("border:1px solid #000000;");
 
         QPixmap pixmap = QPixmap::fromImage(currentImage1);
@@ -369,7 +381,7 @@ void MainWindow::generateDrawingPanels() {
 //Drawing Slots
 void MainWindow::penButton_vocab()
 {
-    ui->penButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->penButton->setStyleSheet("border:2px solid #119DA4; border-radius: 15px;");
     ui->eraserButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
     ui->clearButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
 
@@ -378,7 +390,7 @@ void MainWindow::penButton_vocab()
 
 void MainWindow::eraserButton_vocab()
 {
-    ui->eraserButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->eraserButton->setStyleSheet("border:2px solid #119DA4; border-radius: 15px;");
     ui->penButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
     ui->clearButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
 
@@ -387,7 +399,7 @@ void MainWindow::eraserButton_vocab()
 
 void MainWindow::clearButton_vocab()
 {
-    ui->clearButton->setStyleSheet("border:2px solid #FFFFFF; border-radius: 15px;");
+    ui->clearButton->setStyleSheet("border:2px solid #119DA4; border-radius: 15px;");
     ui->penButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
     ui->eraserButton->setStyleSheet("border:2px solid #000000; border-radius: 15px;");
 
@@ -538,7 +550,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case pen:
                     {
                         //Drawing
-                        painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::black, 8, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
                         currentPoint = endPoint;
                         scribble(currentImage1, 0);
@@ -549,7 +561,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case eraser:
                     {
                         qDebug() << "made it to eraser";
-                        painter.setPen(QPen(Qt::white, 4, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::white, 8, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
                         currentPoint = endPoint;
                         scribble(currentImage1, 0);
@@ -572,7 +584,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case pen:
                     {
                         //Drawing
-                        painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::black, 10, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
                         currentPoint = endPoint;
                         scribble(currentImage1, 0);
@@ -582,7 +594,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case eraser:
                     {
                         //Drawing
-                        painter.setPen(QPen(Qt::white, 4, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::white, 8, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
                         currentPoint = endPoint;
                         scribble(currentImage1, 0);
@@ -604,7 +616,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case pen:
                     {
                         //Drawing
-                        painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::black, 10, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
                         currentPoint = endPoint;
                         scribble(currentImage2, 1);
@@ -614,7 +626,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                     case eraser:
                     {
                         //Drawing
-                        painter.setPen(QPen(Qt::white, 4, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+                        painter.setPen(QPen(Qt::white, 8, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
                         painter.drawLine(currentPoint, endPoint);
 
                         //Saving the points
@@ -659,10 +671,6 @@ void MainWindow::draws(QPoint pt, QPoint start, QPoint end) {
     // Draw and fill the polygon with a color (e.g., light blue)
     painter.setBrush(QColor(139, 69, 19)); // Brown color
     painter.drawPolygon(polygon);
-
-    //Draws the circle
-    // QRect rect(pt.x(), pt.y(), 30, 30);
-    // painter.drawEllipse(rect);
 
     QPixmap image(":/gameImg/car.png"); // Replace ":/path/to/image.png" with the path to your image file
     QPixmap rotatedImage = image.transformed(QTransform().rotate(45));
@@ -768,10 +776,22 @@ void MainWindow::on_game_navBtn2_clicked()
 
 }
 
-void MainWindow::on_help_btn_clicked()
+void MainWindow::on_help_btn_vocab_clicked()
 {
     help_vocab.setModal(true);
     help_vocab.show();
+}
+
+void MainWindow::on_help_btn_alphabet_clicked()
+{
+    help_alphabet.setModal(true);
+    help_alphabet.show();
+}
+
+void MainWindow::on_help_btn_game_clicked()
+{
+    help_game.setModal(true);
+    help_game.show();
 }
 
 

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "alphabethelp.h"
+#include "gamehelp.h"
 #include "vocabulary.h"
 #include "alphabet.h"
 #include "game.h"
@@ -45,6 +47,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public slots:
+    void handleCoverImage();
+
     //alphabet
 
     ///
@@ -233,6 +237,9 @@ private slots:
     /// \brief shows the help ui for vocab
     ///
     void on_help_btn_clicked();
+    void on_help_btn_vocab_clicked();
+    void on_help_btn_alphabet_clicked();
+    void on_help_btn_game_clicked();
 
     ///
     /// \brief seleting pen tool in vocabulary stack.
@@ -289,9 +296,13 @@ private:
     int currentlyOnPanel;
     int wordSize;
 
+    // help menu
     VocabHelp help_vocab;
+    AlphabetHelp help_alphabet;
+    GameHelp help_game;
 
     QTimer timer;
+    QTimer coverTimer;
 
     QImage gameImage;
 
