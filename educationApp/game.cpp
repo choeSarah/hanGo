@@ -78,7 +78,6 @@ void Game::updateWorld() {
     b2Vec2 groundPos = groundBody->GetPosition();
     float groundAngle = groundBody->GetAngle();
     float halfWidth = 1500.0f; // Half-width of the ground body
-    float halfHeight = 10.0f; // Half-height of the ground body
     float startX = -(halfWidth * cos(groundAngle)) + groundPos.x;
     float startY = -(halfWidth * sin(groundAngle)) + groundPos.y -100;
     float endX = (halfWidth * cos(groundAngle)) + groundPos.x;
