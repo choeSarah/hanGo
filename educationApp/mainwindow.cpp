@@ -159,9 +159,9 @@ MainWindow::MainWindow(Vocabulary &vocabulary, Alphabet &alphabet, Game &game, Q
 
     for(int i = 1; i<25; i++)
     {
-        QString icon = QString(":/alphabet_icon/Artboard_1_%1\.png").arg(i);
+        QString icon = QString(":/alphabet_icon/Artboard_1_%1.png").arg(i);
         //QString icon = QString(":/alphabet_icon/Artboard_1_1.png").arg(i);
-        QString ex = QString(":/alphabet_example/EX_1_%1\.png").arg(i);
+        QString ex = QString(":/alphabet_example/EX_1_%1.png").arg(i);
         QImage imageEx(ex);
         QImage imageIcon(icon);
         alphabetImage.push_back(imageIcon);
@@ -447,7 +447,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
     case alpha:
         if (event->button() == Qt::LeftButton) {
             QPoint pos=ui->alphabet_canvas->pos(); //gets the position of the canvas label in relation to the whole window
-            int canvasLabelSize = ui->alphabet_canvas->width(); //gets the size of the actual label
+            //int canvasLabelSize = ui->alphabet_canvas->width(); //gets the size of the actual label
             lastPoint = event->position().toPoint(); //gets the position of where the user clicked in relation to the whole window
             lastPoint -= pos; //making lastPoint = the point of where the user clicked within the label
             emit givePointToAlphabetModel(lastPoint);
@@ -505,7 +505,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
         }
 
         break;
+
+        case game:
+        break;
     }
+
 }
 
 void MainWindow::scribble(QImage image, int layoutItemIndex){
@@ -650,6 +654,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
                 }
             }
         }
+        break;
+        case game:
         break;
     }
 }
